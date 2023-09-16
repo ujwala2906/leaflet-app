@@ -1,1 +1,3 @@
-export { default as MapComponent } from "./MapComponent";
+import MapLeaflet from "./MapLeaflet";
+
+export { MapLeaflet };
