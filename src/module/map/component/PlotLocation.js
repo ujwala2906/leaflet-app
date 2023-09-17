@@ -13,8 +13,6 @@ const PlotLocation = (props) => {
   const { position } = props;
   const map = useMap();
 
-  
-
   useEffect(() => {
     if (position) {
       map.flyTo(L.latLng(position[0], position[1]), map.getZoom(), {
