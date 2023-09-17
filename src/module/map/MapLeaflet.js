@@ -8,7 +8,7 @@ import "./map.css";
 function MapLeaflet() {
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState([51.505, -0.09]);
 
   const params = {
     q: searchText,

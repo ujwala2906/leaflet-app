@@ -6,7 +6,7 @@ import customMarkerImage from "../../../imgs/mark.png";
 
 const customMarker = new Icon({
   iconUrl: customMarkerImage,
-  iconSize: [60, 60],
+  iconSize: [45, 45],
 });
 
 const PlotLocation = (props) => {
@@ -18,15 +18,13 @@ const PlotLocation = (props) => {
       map.flyTo(L.latLng(position[0], position[1]), map.getZoom(), {
         animate: true,
       });
-      map.on("moveend", () => {});
     }
   }, [position, map]);
 
+
   return (
     <Marker position={position} icon={customMarker}>
-      <Popup>
-        You are here.
-      </Popup>
+      <Popup>You are here.</Popup>
     </Marker>
   );
 };
