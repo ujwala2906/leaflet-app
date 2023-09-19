@@ -9,6 +9,8 @@ function MapLeaflet() {
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [position, setPosition] = useState([51.505, -0.09]);
+  const [isClusters, setIsClusters] = useState(false);
+  const [clusterLayer, setClusterLayer] = useState(null);
 
   const params = {
     q: searchText,
@@ -41,6 +43,19 @@ function MapLeaflet() {
     setSearchText("");
   };
 
+  const handleClusters = () => {
+    setPosition([38.76667, -105.51667]);
+    setIsClusters(true);
+  };
+
+  const handleRemoveClusters = () => {
+    if (clusterLayer) {
+      clusterLayer.clearLayers();
+      setClusterLayer(null);
+    }
+    setIsClusters(false);
+  };
+
   return (
     <>
       <div className="container">
@@ -52,11 +67,13 @@ function MapLeaflet() {
               openStreetMapSearch,
               searchResult,
               handleRedirect,
+              handleClusters,
+              handleRemoveClusters,
             }}
           />
         </div>
         <div className="large-empty-div">
-          <MapComponent {...{ position }} />
+          <MapComponent {...{ position, isClusters, setClusterLayer }} />
         </div>
       </div>
     </>
