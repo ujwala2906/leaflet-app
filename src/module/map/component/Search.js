@@ -10,7 +10,9 @@ const Search = (props) => {
     searchResult,
     handleRedirect,
     handleClusters,
-    handleRemoveClusters
+    handleRemoveClusters,
+    handleAddVectorLayer,
+    setIsVectorLayer,
   } = props;
 
   return (
@@ -55,7 +57,7 @@ const Search = (props) => {
           >
             <button
               onClick={handleClusters}
-              style={{ marginTop: "10px", background: "green" }}
+              style={{ marginTop: "10px", background: "#32CD32" }}
             >
               Display Cluster
             </button>
@@ -63,9 +65,25 @@ const Search = (props) => {
           <div>
             <button
               onClick={handleRemoveClusters}
-              style={{ marginTop: "10px", background: "red" }}
+              style={{ marginTop: "10px", background: "#B22222" }}
             >
               Remove Cluster
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={handleAddVectorLayer}
+              style={{ marginTop: "10px", background: "#4682B4" }}
+            >
+              Vector Layer
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => setIsVectorLayer(false)}
+              style={{ marginTop: "10px", background: "#B22222" }}
+            >
+              Remove Vector Layer
             </button>
           </div>
         </>

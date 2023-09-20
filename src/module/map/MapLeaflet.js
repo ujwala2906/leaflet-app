@@ -11,6 +11,7 @@ function MapLeaflet() {
   const [position, setPosition] = useState([51.505, -0.09]);
   const [isClusters, setIsClusters] = useState(false);
   const [clusterLayer, setClusterLayer] = useState(null);
+  const [isVectorLayer, setIsVectorLayer] = useState(false);
 
   const params = {
     q: searchText,
@@ -56,6 +57,11 @@ function MapLeaflet() {
     setIsClusters(false);
   };
 
+  const handleAddVectorLayer = () => {
+    setPosition([51.505, -0.09]);
+    setIsVectorLayer(true)
+  };
+
   return (
     <>
       <div className="container">
@@ -69,11 +75,13 @@ function MapLeaflet() {
               handleRedirect,
               handleClusters,
               handleRemoveClusters,
+              handleAddVectorLayer,
+              setIsVectorLayer
             }}
           />
         </div>
         <div className="large-empty-div">
-          <MapComponent {...{ position, isClusters, setClusterLayer }} />
+          <MapComponent {...{ position, isClusters, setClusterLayer,isVectorLayer }} />
         </div>
       </div>
     </>
