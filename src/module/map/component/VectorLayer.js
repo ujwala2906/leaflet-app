@@ -2,7 +2,7 @@ import React from "react";
 
 import { Circle, Polygon } from "react-leaflet";
 
-const VectorLayer = (props) => {
+const VectorLayer = () => {
 
   const polygon = [
     [54.90512066670786, 11.402928399760787],
