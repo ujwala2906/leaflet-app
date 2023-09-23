@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { OPEN_STREET_MAP_SEARCH_URL } from "../../utils/constant";
 import { MapComponent, Search } from "./component";
@@ -9,6 +9,9 @@ function MapLeaflet() {
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [position, setPosition] = useState([51.505, -0.09]);
+  const [isClusters, setIsClusters] = useState(false);
+  const [clusterLayer, setClusterLayer] = useState(null);
+  const [isVectorLayer, setIsVectorLayer] = useState(false);
 
   const params = {
     q: searchText,
@@ -41,6 +44,28 @@ function MapLeaflet() {
     setSearchText("");
   };
 
+  const handleClusters = () => {
+    setPosition([38.76667, -105.51667]);
+    setIsClusters(!isClusters);
+    setIsVectorLayer(false);
+  };
+
+  const handleAddVectorLayer = () => {
+    setPosition([51.505, -0.09]);
+    setIsVectorLayer(!isVectorLayer);
+    setIsClusters(false);
+  };
+
+  useEffect(() => {
+    if (!isClusters) {
+      if (clusterLayer) {
+        clusterLayer.clearLayers();
+        setClusterLayer(null);
+      }
+      setIsClusters(false);
+    }
+  }, [isClusters, clusterLayer]);
+
   return (
     <>
       <div className="container">
@@ -52,11 +77,15 @@ function MapLeaflet() {
               openStreetMapSearch,
               searchResult,
               handleRedirect,
+              handleClusters,
+              handleAddVectorLayer,
             }}
           />
         </div>
         <div className="large-empty-div">
-          <MapComponent {...{ position }} />
+          <MapComponent
+            {...{ position, isClusters, setClusterLayer, isVectorLayer }}
+          />
         </div>
       </div>
     </>

@@ -9,6 +9,8 @@ const Search = (props) => {
     openStreetMapSearch,
     searchResult,
     handleRedirect,
+    handleClusters,
+    handleAddVectorLayer,
   } = props;
 
   return (
@@ -23,7 +25,7 @@ const Search = (props) => {
         Search
       </button>
 
-      {searchResult.length && (
+      {searchResult.length !== 0 && (
         <ul className="dropdown-list">
           {searchResult.map((data, index) => (
             <li
@@ -40,6 +42,33 @@ const Search = (props) => {
             </li>
           ))}
         </ul>
+      )}
+
+      {!searchResult.length && (
+        <>
+          <div
+            style={{
+              display: "flex",
+              direction: "row",
+              alignItems: "flex-start",
+            }}
+          >
+            <button
+              onClick={handleClusters}
+              style={{ marginTop: "10px", background: "#32CD32" }}
+            >
+              Cluster Layer
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={handleAddVectorLayer}
+              style={{ marginTop: "10px", background: "#8A2BE2" }}
+            >
+              Vector Layer
+            </button>
+          </div>
+        </>
       )}
     </>
   );
