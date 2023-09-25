@@ -1,17 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
-import L, { Icon } from "leaflet";
+import L from "leaflet";
 import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 import customMarkerImage from "../../../imgs/mark.png";
-
-const customMarker = new Icon({
-  iconUrl: customMarkerImage,
-  iconSize: [30, 30],
-});
 
 const Clusters = (props) => {
   const { setClusterLayer, isClusters } = props;
@@ -42,10 +37,16 @@ const Clusters = (props) => {
 
   useEffect(() => {
     if (isClusters) {
+       // Clear existing markers from markerClusterGroup
+      markerClusterGroup.clearLayers();
       markersGroup.forEach((item) => {
         const latlng = [item.lat, item.long];
+        const entIcon = L.icon({
+          iconUrl: customMarkerImage,
+          iconSize: [60, 50],
+        });
         const marker = L.marker(latlng, {
-          icon: customMarker,
+          icon: entIcon,
         });
         markerClusterGroup.addLayer(marker);
       });
@@ -53,6 +54,10 @@ const Clusters = (props) => {
       markerClusterGroup.addTo(map);
 
       setClusterLayer(markerClusterGroup);
+
+      return () => {
+        map.removeLayer(markerClusterGroup);
+      };
     }
   }, [isClusters]);
 

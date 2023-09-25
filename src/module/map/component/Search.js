@@ -51,19 +51,26 @@ const Search = (props) => {
               display: "flex",
               direction: "row",
               alignItems: "flex-start",
+              marginTop: "20px",
             }}
           >
             <button
               onClick={handleClusters}
-              style={{ marginTop: "10px", background: "#32CD32" }}
+              style={{
+                width: "162px",
+                marginRight: "5px",
+                background: "#32CD32",
+              }}
             >
               Cluster Layer
             </button>
-          </div>
-          <div>
             <button
               onClick={handleAddVectorLayer}
-              style={{ marginTop: "10px", background: "#8A2BE2" }}
+              style={{
+                width: "162px",
+                marginLeft: "5px",
+                background: "#8A2BE2",
+              }}
             >
               Vector Layer
             </button>
